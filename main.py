@@ -3,7 +3,8 @@ import sqlite3
 
 import csv
 from random import sample
-from PyQt5 import QtGui
+#from PyQt5 import QtGuim
+from PyQt5.QtGui import QFont, QPixmap
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QLineEdit, QComboBox
 from PyQt5.QtWidgets import QInputDialog, QPushButton, QWidget, QTableView, QPlainTextEdit
@@ -67,7 +68,7 @@ class FirstSubWindow(QWidget):
             con = sqlite3.connect("redactor_db.db")
             cur = con.cursor()
             cur.execute("""insert into redact(Question, V1, V2, V3, V4, Answer)
-                     values(?, ?, ?, ?, ?, ?)""", (q, str(a), str(b), str(c), str(d), cor))
+                     values(?, ?, ?, ?, ?, ?)""", (q, a, b, c, d, cor))
             con.commit()
             con.close()
             self.lineEdit.setText("")
@@ -342,10 +343,11 @@ class Example(QMainWindow):
                           f"это самой программе, игроком - ответить на интересные \n"
                           f" вопросы. Для корректной работы программы необходимо \n "
                           f"пройти все роли в заявленном порядке. Приятной игры!")
-        self.text.move(250, 275)
-        self.text.resize(500, 200)
+        self.text.setFont(QFont("Times New Roman", 10, QFont.Bold))
+        self.text.move(200, 275)
+        self.text.resize(600, 200)
 
-        self.pixmap = QtGui.QPixmap('pict0.jpg')
+        self.pixmap = QPixmap('pict0.jpg')
         self.image = QLabel(self)
         self.image.move(175, 20)
         self.image.resize(400, 250)
