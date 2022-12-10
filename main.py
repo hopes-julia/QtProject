@@ -235,6 +235,8 @@ class ThirdSubWindow(QWidget):
         self.pushButton_3.hide()
         self.pushButton_4.hide()
         self.pushButton_5.hide()
+        self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
     def correctB(self):
@@ -253,6 +255,8 @@ class ThirdSubWindow(QWidget):
         self.pushButton_3.hide()
         self.pushButton_4.hide()
         self.pushButton_5.hide()
+        self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
     def correctC(self):
@@ -271,6 +275,8 @@ class ThirdSubWindow(QWidget):
         self.pushButton_3.hide()
         self.pushButton_4.hide()
         self.pushButton_5.hide()
+        self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
     def correctD(self):
@@ -289,6 +295,8 @@ class ThirdSubWindow(QWidget):
         self.pushButton_3.hide()
         self.pushButton_4.hide()
         self.pushButton_5.hide()
+        self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
     def play(self):
@@ -306,6 +314,7 @@ class ThirdSubWindow(QWidget):
             self.i = questions[self.j]
             text = self.i[0].upper() + self.i[1:] + "?"
             self.plainTextEdit.setPlainText(text)
+            self.plainTextEdit.setEnabled(True)
             res = self.cur.execute("""select V1 from redact where Question = ?""", (self.i,)).fetchone()
             self.pushButton_2.setText("Вариант A: " + res[0])
             res = self.cur.execute("""select V2 from redact where Question = ?""", (self.i,)).fetchone()
@@ -379,13 +388,13 @@ class Example(QMainWindow):
                 self.sub_window = SecondSubWindow()
                 # Button Event
                 self.sub_window.show()
-                self.btn.setText("Continuation")
+                self.btn.setText("Continue")
             elif self.role == "Игрок":
                 # self.change_red()
                 self.sub_window = ThirdSubWindow()
                 # Button Event
                 self.sub_window.show()
-                self.btn.setText("Continuation")
+                self.btn.setText("Continue")
 
 
 if __name__ == '__main__':
