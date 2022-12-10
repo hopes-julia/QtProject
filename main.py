@@ -197,8 +197,8 @@ class ThirdSubWindow(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('design2.ui', self)  # Загружаем дизайн
-        self.plainTextEdit.setEnabled(False)
-        self.plainTextEdit_2.setEnabled(False)
+        #self.plainTextEdit.setEnabled(False)
+        #self.plainTextEdit_2.setEnabled(False)
         self.pushButton_2.hide()
         self.pushButton_3.hide()
         self.pushButton_4.hide()
