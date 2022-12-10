@@ -65,6 +65,8 @@ class FirstSubWindow(QWidget):
                 raise Error2
             if len(q) < 2:
                 raise Error2
+            if a.isdigit() or b.isdigit() or c.isdigit() or d.isdigit():
+                raise Error2
             con = sqlite3.connect("redactor_db.db")
             cur = con.cursor()
             cur.execute("""insert into redact(Question, V1, V2, V3, V4, Answer)
