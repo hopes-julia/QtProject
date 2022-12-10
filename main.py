@@ -67,7 +67,7 @@ class FirstSubWindow(QWidget):
             con = sqlite3.connect("redactor_db.db")
             cur = con.cursor()
             cur.execute("""insert into redact(Question, V1, V2, V3, V4, Answer)
-                     values(?, ?, ?, ?, ?, ?)""", (q, a, b, c, d, cor))
+                     values(?, ?, ?, ?, ?, ?)""", (q, str(a), str(b), str(c), str(d), cor))
             con.commit()
             con.close()
             self.lineEdit.setText("")
