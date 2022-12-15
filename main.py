@@ -344,8 +344,17 @@ class ThirdSubWindow(QWidget):
             self.pushButton_5.hide()
             self.pushButton_6.hide()
             self.plainTextEdit.hide()
-            self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + f"Набранная вами сумма: {self.itog}")
+            res = f"Набранная вами сумма: {self.itog}"
+            self.sub_window = Itog(res)
+            self.sub_window.show()
+            self.close()
+            #self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + f"Набранная вами сумма: {self.itog}")
 
+class Itog(QWidget):
+    def __init__(self, res):
+        super().__init__()
+        uic.loadUi('design4.ui', self)  # Загружаем дизайн
+        self.label.setText(res)
 
 
 class Example(QMainWindow):
