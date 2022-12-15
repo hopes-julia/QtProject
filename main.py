@@ -45,6 +45,7 @@ class FirstSubWindow(QWidget):
         model.select()
         self.tableView.setModel(model)
         self.pushButton.clicked.connect(self.save_q)
+        self.pushButton.clicked.connect(self.end)
 
     def save_q(self):
         try:
@@ -92,6 +93,9 @@ class FirstSubWindow(QWidget):
         except:
             self.label_7.setText("Ошибка: некорректно введены данные")
             self.label_7.show()
+
+    def end(self):
+        self.close()
 
 
 class SecondSubWindow(QWidget):
