@@ -45,7 +45,7 @@ class FirstSubWindow(QWidget):
         model.select()
         self.tableView.setModel(model)
         self.pushButton.clicked.connect(self.save_q)
-        self.pushButton.clicked.connect(self.end)
+        self.pushButton_2.clicked.connect(self.end)
 
     def save_q(self):
         try:
