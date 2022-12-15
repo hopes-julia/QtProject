@@ -3,7 +3,7 @@ import sqlite3
 
 import csv
 from random import sample
-#from PyQt5 import QtGuim
+# from PyQt5 import QtGuim
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QLineEdit, QComboBox
@@ -94,7 +94,6 @@ class FirstSubWindow(QWidget):
             self.label_7.show()
 
 
-
 class SecondSubWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -173,7 +172,7 @@ class SecondSubWindow(QWidget):
             self.label_2.show()
         except:
             self.label_3.hide()
-            self.label_2.setText("Ошибка: неккоректно введены данные")
+            self.label_2.setText("Ошибка: некорректно введены данные")
             self.plainTextEdit.setPlainText("")
             self.label_2.show()
 
@@ -194,13 +193,12 @@ class SecondSubWindow(QWidget):
         self.pushButton_3.clicked.connect(self.result)
 
 
-
 class ThirdSubWindow(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('design2.ui', self)  # Загружаем дизайн
-        #self.plainTextEdit.setEnabled(False)
-        #self.plainTextEdit_2.setEnabled(False)
+        # self.plainTextEdit.setEnabled(False)
+        # self.plainTextEdit_2.setEnabled(False)
         self.pushButton_2.hide()
         self.pushButton_3.hide()
         self.pushButton_4.hide()
@@ -220,7 +218,7 @@ class ThirdSubWindow(QWidget):
         self.pushButton.clicked.connect(self.play)
 
     def correctA(self):
-        if self.cur.execute("""select Answer from redact where Question = ?""", (self.i,)).fetchone()[0] == "A"\
+        if self.cur.execute("""select Answer from redact where Question = ?""", (self.i,)).fetchone()[0] == "A" \
                 and self.j < len(questions):
             self.spisok[questions.index(self.i)] = prices[questions.index(self.i)] + " ✅"
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Вы дали правильный ответ")
@@ -236,11 +234,12 @@ class ThirdSubWindow(QWidget):
         self.pushButton_4.hide()
         self.pushButton_5.hide()
         self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.hide()
         self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
     def correctB(self):
-        if self.cur.execute("""select Answer from redact where Question = ?""", (self.i,)).fetchone()[0] == "B"\
+        if self.cur.execute("""select Answer from redact where Question = ?""", (self.i,)).fetchone()[0] == "B" \
                 and self.j < len(questions):
             self.spisok[questions.index(self.i)] = prices[questions.index(self.i)] + " ✅"
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Вы дали правильный ответ")
@@ -256,6 +255,7 @@ class ThirdSubWindow(QWidget):
         self.pushButton_4.hide()
         self.pushButton_5.hide()
         self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.hide()
         self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
@@ -276,11 +276,12 @@ class ThirdSubWindow(QWidget):
         self.pushButton_4.hide()
         self.pushButton_5.hide()
         self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.hide()
         self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
     def correctD(self):
-        if self.cur.execute("""select Answer from redact where Question = ?""", (self.i,)).fetchone()[0] == "D"\
+        if self.cur.execute("""select Answer from redact where Question = ?""", (self.i,)).fetchone()[0] == "D" \
                 and self.j < len(questions):
             self.spisok[questions.index(self.i)] = prices[questions.index(self.i)] + " ✅"
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Вы дали правильный ответ")
@@ -296,6 +297,7 @@ class ThirdSubWindow(QWidget):
         self.pushButton_4.hide()
         self.pushButton_5.hide()
         self.plainTextEdit.setPlainText("")
+        self.plainTextEdit.hide()
         self.plainTextEdit.setEnabled(False)
         self.pushButton_6.clicked.connect(self.play)
 
@@ -335,6 +337,7 @@ class ThirdSubWindow(QWidget):
             self.pushButton_6.hide()
             self.plainTextEdit.hide()
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + f"Набранная вами сумма: {self.itog}")
+
 
 
 class Example(QMainWindow):
@@ -397,8 +400,13 @@ class Example(QMainWindow):
                 self.btn.setText("Continue")
 
 
+def except_hook(cls, exception, traceback):
+    sys.__excepthook__(cls, exception, traceback)
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Example()
     ex.show()
+    sys.excepthook = except_hook
     sys.exit(app.exec())
