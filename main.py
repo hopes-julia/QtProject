@@ -125,6 +125,7 @@ class SecondSubWindow(QWidget):
         self.flag = 0
         self.pushButton_2.clicked.connect(self.choose2)
         self.pushButton.clicked.connect(self.choose)
+        self.pushButton_4.clicked.connect(self.end)
 
     def choose2(self):
         try:
@@ -195,6 +196,9 @@ class SecondSubWindow(QWidget):
         self.lineEdit_2.show()
         self.flag = 1
         self.pushButton_3.clicked.connect(self.result)
+
+    def end(self):
+        self.close()
 
 
 class ThirdSubWindow(QWidget):

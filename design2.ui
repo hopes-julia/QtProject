@@ -208,29 +208,6 @@
     <string>Next</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>251</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>true</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(255, 255, 255)</string>
-   </property>
-   <property name="text">
-    <string>&lt;-Вернуться на главный экран</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
