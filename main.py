@@ -6,7 +6,7 @@ from random import sample
 # from PyQt5 import QtGuim
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QLineEdit, QComboBox
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QLineEdit, QComboBox, QCheckBox
 from PyQt5.QtWidgets import QInputDialog, QPushButton, QWidget, QTableView, QPlainTextEdit
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 
@@ -50,17 +50,27 @@ class FirstSubWindow(QWidget):
     def save_q(self):
         try:
             self.label_7.hide()
+            spisok = [0 for i in range(4)]
             q = self.lineEdit.text()
             a = self.lineEdit_2.text()
             b = self.lineEdit_3.text()
             c = self.lineEdit_4.text()
             d = self.lineEdit_5.text()
-            cor = self.lineEdit_6.text().upper()
-            if q == "" or a == "" or b == "" or c == "":
+            if self.checkBox.isChecked() == True:
+                cor = "A"
+                spisok[0] = 1
+            if self.checkBox_2.isChecked() == True:
+                cor = "B"
+                spisok[1] = 1
+            if self.checkBox_3.isChecked() == True:
+                cor = "C"
+                spisok[2] = 1
+            if self.checkBox_4.isChecked() == True:
+                cor = "D"
+                spisok[3] = 1
+            if spisok.count(1) != 1:
                 raise Error2
-            if d == "" or cor == "" or not cor.isalpha():
-                raise Error2
-            if cor.upper() not in answers:
+            if q == "" or a == "" or b == "" or c == "" or d == "":
                 raise Error2
             if q[0].isdigit():
                 raise Error2
@@ -68,6 +78,8 @@ class FirstSubWindow(QWidget):
                 raise Error2
             if a.isdigit() or b.isdigit() or c.isdigit() or d.isdigit():
                 raise Error2
+
+
             con = sqlite3.connect("redactor_db.db")
             cur = con.cursor()
             cur.execute("""insert into redact(Question, V1, V2, V3, V4, Answer)
@@ -79,7 +91,11 @@ class FirstSubWindow(QWidget):
             self.lineEdit_3.setText("")
             self.lineEdit_4.setText("")
             self.lineEdit_5.setText("")
-            self.lineEdit_6.setText("")
+            self.checkBox.setChecked(False)
+            self.checkBox_2.setChecked(False)
+            self.checkBox_3.setChecked(False)
+            self.checkBox_4.setChecked(False)
+
             db = QSqlDatabase.addDatabase('QSQLITE')
             db.setDatabaseName('redactor_db.db')
             db.open()
@@ -205,8 +221,6 @@ class ThirdSubWindow(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('design2.ui', self)  # Загружаем дизайн
-        # self.plainTextEdit.setEnabled(False)
-        # self.plainTextEdit_2.setEnabled(False)
         self.pushButton_2.hide()
         self.pushButton_3.hide()
         self.pushButton_4.hide()
@@ -348,7 +362,8 @@ class ThirdSubWindow(QWidget):
             self.sub_window = Itog(res)
             self.sub_window.show()
             self.close()
-            #self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + f"Набранная вами сумма: {self.itog}")
+            # self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + f"Набранная вами сумма: {self.itog}")
+
 
 class Itog(QWidget):
     def __init__(self, res):
@@ -360,39 +375,26 @@ class Itog(QWidget):
 class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        uic.loadUi('design5.ui', self)
+        # self.setGeometry(500, 200, *SCREEN_SIZE_main)
+        # self.setWindowTitle('Отображение картинки')
+        self.label.setText(f"Вы попали в игру 'Кто хочет стать миллионером?'\n"
+                           f"Вы можете попробовать на себе три роли поочередно,\n"
+                           f" побыть редактором и придумать вопросы, ведущим - и \n"
+                           f" выбрать из таблицы задания для игры или предоставить \n "
+                           f"это самой программе, игроком - ответить на интересные \n"
+                           f" вопросы. Для корректной работы программы необходимо \n "
+                           f"пройти все роли в заявленном порядке. Приятной игры!")
 
-    def initUI(self):
-        self.setGeometry(500, 200, *SCREEN_SIZE_main)
-        # self.showFullScreen()
-        self.setWindowTitle('Отображение картинки')
+        self.pixmap = QPixmap('pict.jpg')
+        self.label_2.setPixmap(self.pixmap)
 
-        self.text = QLabel(self)
-        self.text.setText(f"Вы попали в игру 'Кто хочет стать миллионером?'\n"
-                          f"Вы можете попробовать на себе три роли поочередно,\n"
-                          f" побыть редактором и придумать вопросы, ведущим - и \n"
-                          f" выбрать из таблицы задания для игры или предоставить \n "
-                          f"это самой программе, игроком - ответить на интересные \n"
-                          f" вопросы. Для корректной работы программы необходимо \n "
-                          f"пройти все роли в заявленном порядке. Приятной игры!")
-        self.text.setFont(QFont("Times New Roman", 10, QFont.Bold))
-        self.text.move(200, 275)
-        self.text.resize(600, 200)
-
-        self.pixmap = QPixmap('pict0.jpg')
-        self.image = QLabel(self)
-        self.image.move(175, 20)
-        self.image.resize(400, 250)
-        self.image.setPixmap(self.pixmap)
-
-        self.btn = QPushButton(self)
-        self.btn.resize(150, 50)
-        self.btn.move(390, 525)
-        self.btn.setText("Start")
-
-        self.btn.clicked.connect(self.change1)
+        self.pushButton.setText("Start")
+        self.pushButton.clicked.connect(self.change1)
 
     def change1(self):
+        #QInputDialog.resize(QInputDialog, 200, 80)
+        #QInputDialog.setAutoFillBackground(True)
         text, ok_pressed = QInputDialog.getItem(self, "Выберите роль", "Кем вы хотите быть?",
                                                 ("Редактор", "Ведущий", "Игрок"), 0, False)
         if ok_pressed:
@@ -402,19 +404,19 @@ class Example(QMainWindow):
                 self.sub_window = FirstSubWindow()
                 # Button Event
                 self.sub_window.show()
-                self.btn.setText("Continuation")
+                self.pushButton.setText("Continuation")
             elif self.role == "Ведущий":
                 # self.change_red()
                 self.sub_window = SecondSubWindow()
                 # Button Event
                 self.sub_window.show()
-                self.btn.setText("Continue")
+                self.pushButton.setText("Continue")
             elif self.role == "Игрок":
                 # self.change_red()
                 self.sub_window = ThirdSubWindow()
                 # Button Event
                 self.sub_window.show()
-                self.btn.setText("Continue")
+                self.pushButton.setText("Continue")
 
 
 def except_hook(cls, exception, traceback):
