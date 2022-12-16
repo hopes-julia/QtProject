@@ -3,7 +3,6 @@ import sqlite3
 
 import csv
 from random import sample
-# from PyQt5 import QtGuim
 from PyQt5.QtGui import QFont, QPixmap
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QLineEdit, QComboBox, QCheckBox
