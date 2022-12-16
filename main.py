@@ -257,8 +257,6 @@ class ThirdSubWindow(QWidget):
             self.sub_window = Itog(res)
             self.sub_window.show()
             self.close()
-            # self.pushButton_7.show()
-            # self.pushButton_7.clicked.connect(self.end)
         self.pushButton_6.show()
         self.pushButton_2.hide()
         self.pushButton_3.hide()
@@ -375,19 +373,7 @@ class ThirdSubWindow(QWidget):
             self.pushButton_3.clicked.connect(self.correctB)
             self.pushButton_4.clicked.connect(self.correctC)
             self.pushButton_5.clicked.connect(self.correctD)
-        # else:
-        #    print(self.itog)
-        #    res = f"Набранная вами сумма: {self.itog}"
-        #    self.sub_window = Itog(res)
-        #    self.sub_window.show()
-        #    self.close()
 
-    # def end(self):
-    #    print(self.itog)
-    #    res = f"Набранная вами сумма: {self.itog}"
-    #    self.sub_window = Itog(res)
-    #    self.sub_window.show()
-    #    self.close()
 
 
 class Itog(QWidget):
