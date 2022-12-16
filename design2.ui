@@ -208,6 +208,25 @@
     <string>Next</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_7">
+   <property name="geometry">
+    <rect>
+     <x>825</x>
+     <y>720</y>
+     <width>271</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Last</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -228,6 +228,7 @@ class ThirdSubWindow(QWidget):
         self.pushButton_4.hide()
         self.pushButton_5.hide()
         self.pushButton_6.hide()
+        self.pushButton_7.hide()
         self.plainTextEdit.hide()
         self.plainTextEdit_2.hide()
         self.con = sqlite3.connect("redactor_db.db")
@@ -251,6 +252,9 @@ class ThirdSubWindow(QWidget):
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Ваш ответ неверный")
         if self.j == questions.index(self.i):
             self.j += 1
+        if self.j == len(questions):
+            self.pushButton_7.show()
+            self.pushButton_7.clicked.connect(self.end)
         self.pushButton_6.show()
         self.pushButton_2.hide()
         self.pushButton_3.hide()
@@ -272,6 +276,9 @@ class ThirdSubWindow(QWidget):
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Ваш ответ неверный")
         if self.j == questions.index(self.i):
             self.j += 1
+        if self.j == len(questions):
+            self.pushButton_7.show()
+            self.pushButton_7.clicked.connect(self.end)
         self.pushButton_6.show()
         self.pushButton_2.hide()
         self.pushButton_3.hide()
@@ -293,6 +300,9 @@ class ThirdSubWindow(QWidget):
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Ваш ответ неверный")
         if self.j == questions.index(self.i):
             self.j += 1
+        if self.j == len(questions):
+            self.pushButton_7.show()
+            self.pushButton_7.clicked.connect(self.end)
         self.pushButton_6.show()
         self.pushButton_2.hide()
         self.pushButton_3.hide()
@@ -314,6 +324,9 @@ class ThirdSubWindow(QWidget):
             self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + "Ваш ответ неверный")
         if self.j == questions.index(self.i):
             self.j += 1
+        if self.j == len(questions):
+            self.pushButton_7.show()
+            self.pushButton_7.clicked.connect(self.end)
         self.pushButton_6.show()
         self.pushButton_2.hide()
         self.pushButton_3.hide()
@@ -352,17 +365,13 @@ class ThirdSubWindow(QWidget):
             self.pushButton_3.clicked.connect(self.correctB)
             self.pushButton_4.clicked.connect(self.correctC)
             self.pushButton_5.clicked.connect(self.correctD)
-        else:
-            self.pushButton_2.hide()
-            self.pushButton_3.hide()
-            self.pushButton_4.hide()
-            self.pushButton_5.hide()
-            self.pushButton_6.hide()
-            self.plainTextEdit.hide()
-            res = f"Набранная вами сумма: {self.itog}"
-            self.sub_window = Itog(res)
-            self.sub_window.show()
-            self.close()
+
+
+    def end(self):
+        res = f"Набранная вами сумма: {self.itog}"
+        self.sub_window = Itog(res)
+        self.sub_window.show()
+        self.close()
 
 
 class Itog(QWidget):
