@@ -79,7 +79,6 @@ class FirstSubWindow(QWidget):
             if a.isdigit() or b.isdigit() or c.isdigit() or d.isdigit():
                 raise Error2
 
-
             con = sqlite3.connect("redactor_db.db")
             cur = con.cursor()
             cur.execute("""insert into redact(Question, V1, V2, V3, V4, Answer)
@@ -202,7 +201,8 @@ class SecondSubWindow(QWidget):
         self.label_3.hide()
         self.lineEdit.hide()
         self.lineEdit.setText("")
-        stroka = "Список вопросов:" + "\n" + "\n".join(self.quest)
+        spisok = [f"{i + 1}. {self.quest[i]}" for i in range(len(self.quest))]
+        stroka = "Список вопросов:" + "\n" + "\n".join(spisok)
         with open("question.txt", "wt", encoding="utf8") as f:
             f.write("")
             f.write("@".join(self.quest))
@@ -233,7 +233,7 @@ class ThirdSubWindow(QWidget):
         with open("question.txt", "rt", encoding="utf8") as f:
             for i in f.read().split("@"):
                 questions.append(i)
-        print(questions)
+        # print(questions)
         self.spisok = [prices[j] for j in range(len(questions))]
         self.j = 0
         self.itog = 0
@@ -334,6 +334,7 @@ class ThirdSubWindow(QWidget):
         self.pushButton.hide()
         self.flag = 0
         self.plainTextEdit_2.setPlainText("\n".join(self.spisok))
+        print(self.j)
         if self.j < len(questions):
             self.i = questions[self.j]
             text = self.i[0].upper() + self.i[1:] + "?"
