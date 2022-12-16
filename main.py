@@ -227,7 +227,6 @@ class ThirdSubWindow(QWidget):
         self.pushButton_4.hide()
         self.pushButton_5.hide()
         self.pushButton_6.hide()
-        self.pushButton_7.hide()
         self.plainTextEdit.hide()
         self.plainTextEdit_2.hide()
         self.con = sqlite3.connect("redactor_db.db")
