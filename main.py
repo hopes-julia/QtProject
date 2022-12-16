@@ -362,7 +362,6 @@ class ThirdSubWindow(QWidget):
             self.sub_window = Itog(res)
             self.sub_window.show()
             self.close()
-            # self.plainTextEdit_2.setPlainText("\n".join(self.spisok) + "\n" + f"Набранная вами сумма: {self.itog}")
 
 
 class Itog(QWidget):
@@ -376,8 +375,6 @@ class Example(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('design5.ui', self)
-        # self.setGeometry(500, 200, *SCREEN_SIZE_main)
-        # self.setWindowTitle('Отображение картинки')
         self.label.setText(f"Вы попали в игру 'Кто хочет стать миллионером?'\n"
                            f"Вы можете попробовать на себе три роли поочередно,\n"
                            f" побыть редактором и придумать вопросы, ведущим - и \n"
@@ -393,26 +390,21 @@ class Example(QMainWindow):
         self.pushButton.clicked.connect(self.change1)
 
     def change1(self):
-        #QInputDialog.resize(QInputDialog, 200, 80)
-        #QInputDialog.setAutoFillBackground(True)
         text, ok_pressed = QInputDialog.getItem(self, "Выберите роль", "Кем вы хотите быть?",
                                                 ("Редактор", "Ведущий", "Игрок"), 0, False)
         if ok_pressed:
             self.role = text
             if self.role == "Редактор":
-                # self.change_red()
                 self.sub_window = FirstSubWindow()
                 # Button Event
                 self.sub_window.show()
                 self.pushButton.setText("Continuation")
             elif self.role == "Ведущий":
-                # self.change_red()
                 self.sub_window = SecondSubWindow()
                 # Button Event
                 self.sub_window.show()
                 self.pushButton.setText("Continue")
             elif self.role == "Игрок":
-                # self.change_red()
                 self.sub_window = ThirdSubWindow()
                 # Button Event
                 self.sub_window.show()
