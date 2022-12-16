@@ -125,6 +125,8 @@ class SecondSubWindow(QWidget):
                 csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             for i in res:
                 writer.writerow(i[0])
+        with open("question.txt", "wt", encoding="utf8") as f:
+            f.write("")
         self.quest = []
         with open('try.csv', encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=';', quotechar='"')
@@ -233,7 +235,6 @@ class ThirdSubWindow(QWidget):
         with open("question.txt", "rt", encoding="utf8") as f:
             for i in f.read().split("@"):
                 questions.append(i)
-        # print(questions)
         self.spisok = [prices[j] for j in range(len(questions))]
         self.j = 0
         self.itog = 0
@@ -334,7 +335,6 @@ class ThirdSubWindow(QWidget):
         self.pushButton.hide()
         self.flag = 0
         self.plainTextEdit_2.setPlainText("\n".join(self.spisok))
-        print(self.j)
         if self.j < len(questions):
             self.i = questions[self.j]
             text = self.i[0].upper() + self.i[1:] + "?"
@@ -370,6 +370,11 @@ class Itog(QWidget):
         super().__init__()
         uic.loadUi('design4.ui', self)  # Загружаем дизайн
         self.label.setText(res)
+        self.pushButton.clicked.connect(self.new)
+
+    def new(self):
+        self.close()
+
 
 
 class Example(QMainWindow):
